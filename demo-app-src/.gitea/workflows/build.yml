@@ -1,0 +1,24 @@
+name: Build Docker image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+env:
+  GITEA_SERVER_URL: "http://192.168.91.130:3000"
+  GITEA_REPOSITORY: "gitea/demo-app-src"
+
+jobs:
+  build:
+    runs-on: ubuntu-docker
+    steps:
+      - name: Checkout repository
+        run: |
+          git clone $GITEA_SERVER_URL/$GITEA_REPOSITORY.git .
+          ls -la
+
+      - name: Build Docker image
+        run: |
+          docker build -t demo-app-ci:test .
