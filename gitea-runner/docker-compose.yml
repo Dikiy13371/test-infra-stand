@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  act_runner:
+    image: gitea/act_runner:latest
+    container_name: gitea-act-runner
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+    environment:
+      GITEA_INSTANCE_URL: "http://192.168.91.130:3000"
+      GITEA_RUNNER_REGISTRATION_TOKEN: "isiXKklaMehQ8EoX1Y7meaKIM2VWexLWVFSc5iUb"
+      GITEA_RUNNER_NAME: "vm-runner"
+      GITEA_RUNNER_LABELS: "ubuntu-docker:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+
